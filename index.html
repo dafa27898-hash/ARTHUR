@@ -1401,9 +1401,9 @@ function hitungAdminNetzme(){
         const total =
             parseInt(withdraw.value.replace(/\D/g,"")) || 0;
 
-        if(total==0){
+        if(total == 0){
 
-            admin.value="";
+            admin.value = "";
             return;
 
         }
@@ -1413,10 +1413,6 @@ function hitungAdminNetzme(){
         if(total <= 100000000){
 
             biaya = 4500;
-
-        }else if(total <= 250000000){
-
-            biaya = 15000;
 
         }else{
 
