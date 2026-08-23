@@ -1405,20 +1405,46 @@ function hitungAdminNetzme(){
 
         let biaya = 0;
 
-        if(total <= 100000000){
+        // ==============================
+        // BIAYA ADM NETZME
+        // ==============================
+        //
+        // Rp.0 s/d Rp.100.000.000
+        // = Rp.4.500
+        //
+        // Rp.100.000.001 s/d Rp.999.999.999
+        // = Rp.30.000
+        //
+        // Rp.15.000 SUDAH DIHAPUS
+        // ==============================
+
+        if(total > 0 && total <= 100000000){
+
             biaya = 4500;
-        }else{
+
+        }else if(total >= 100000001 && total <= 999999999){
+
             biaya = 30000;
+
+        }else{
+
+            biaya = 0;
+
         }
 
         if(total === 0){
+
             admin.value = "";
+
         }else{
+
             admin.value = biaya.toLocaleString("en-US");
+
         }
 
         // Update biaya transfer NETZME
         hitungTransferNetzme();
+
     }
 
     withdraw.addEventListener("input", hitung);
