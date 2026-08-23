@@ -7,9 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MINITOTO ADMIN PANEL V6 PRO - ADM 30000</title>
-
-<meta name="version" content="ADM-30000-V2">    
+<title>MINITOTO ADMIN PANEL V6 PRO</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -350,6 +348,7 @@ box-shadow:
 
     background:linear-gradient(135deg,#9c9c9cc7,#7e7e7e);
 
+    
     box-shadow:
     0 12px 35px rgba(2, 1, 1, 0.35);
 
@@ -1400,58 +1399,40 @@ function hitungAdminNetzme(){
 
     function hitung(){
 
-        const total = parseInt(
-            withdraw.value.replace(/\D/g,""),
-            10
-        ) || 0;
-
-        let biaya = 0;
-
-        // ==============================
-        // BIAYA ADM NETZME
-        // ==============================
-        //
-        // Rp.0 s/d Rp.100.000.000
-        // = Rp.4.500
-        //
-        // Rp.100.000.001 s/d Rp.999.999.999
-        // = Rp.30.000
-        //
-        // Rp.15.000 SUDAH DIHAPUS
-        // ==============================
-
-        if(total > 0 && total <= 100000000){
-
-            biaya = 4500;
-
-        }else if(total >= 100000001 && total <= 999999999){
-
-            biaya = 30000;
-
-        }else{
-
-            biaya = 0;
-
-        }
+        const total =
+            parseInt(withdraw.value.replace(/\D/g,"")) || 0;
 
         if(total === 0){
 
             admin.value = "";
-
-        }else{
-
-            admin.value = biaya.toLocaleString("en-US");
+            return;
 
         }
 
-        // Update biaya transfer NETZME
+        let biaya = 0;
+
+        if(total <= 100000000){
+
+            // 0 - 100.000.000
+            biaya = 4500;
+
+        }else{
+
+            // 100.000.001 ke atas
+            biaya = 30000;
+
+        }
+
+        admin.value = biaya.toLocaleString("en-US");
+
         hitungTransferNetzme();
+
+        admin.dispatchEvent(new Event("input"));
 
     }
 
     withdraw.addEventListener("input", hitung);
 
-    hitung();
 }
 
 function hitungTransferNetzme(){
