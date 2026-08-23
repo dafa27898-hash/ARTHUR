@@ -1398,38 +1398,32 @@ function hitungAdminNetzme(){
 
     function hitung(){
 
-        const total =
-            parseInt(withdraw.value.replace(/\D/g,"")) || 0;
-
-        if(total == 0){
-
-            admin.value = "";
-            return;
-
-        }
+        const total = parseInt(
+            withdraw.value.replace(/\D/g,""),
+            10
+        ) || 0;
 
         let biaya = 0;
 
         if(total <= 100000000){
-
             biaya = 4500;
-
         }else{
-
             biaya = 30000;
-
         }
 
-        admin.value = biaya.toLocaleString("en-US");
+        if(total === 0){
+            admin.value = "";
+        }else{
+            admin.value = biaya.toLocaleString("en-US");
+        }
 
+        // Update biaya transfer NETZME
         hitungTransferNetzme();
-
-        admin.dispatchEvent(new Event("input"));
-
     }
 
     withdraw.addEventListener("input", hitung);
 
+    hitung();
 }
 
 function hitungTransferNetzme(){
