@@ -1466,11 +1466,9 @@ if(saldo.value !== ""){
         }
 
         // Rumus utama
-        let hasil = total - tampung - biayaAdmin;
+let hasil = total - tampung - biayaAdmin;
 
-        if(hasil < 0) hasil = 0;
-
-        fee.value = hasil.toLocaleString("en-US");
+fee.value = hasil.toLocaleString("en-US");
 
     }
 
